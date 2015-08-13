@@ -1,0 +1,34 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+version = '0.1'
+group = 'discobeard'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    compile 'org.codehaus.groovy:groovy-all:2.4.3'
+    compile 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.6.1'
+    compile 'com.sun.jersey:jersey-client:1.19'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+    testCompile ('org.mock-server:mockserver-netty:3.9.17'){
+        exclude group:'com.fasterxml.jackson.core'
+    }
+}
+
+buildscript {
+    repositories { mavenCentral() }
+
+    dependencies {
+    }
+}
+
+jar {
+    baseName = 'dota2-api-wrapper'
+    version = '0.1'
+}
+
