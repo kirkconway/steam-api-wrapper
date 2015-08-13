@@ -5,7 +5,7 @@ class DotaApiClientTest extends BaseSpec {
 
     def 'when the client is created with a specific base url the baseUrl and key are stored successfully'() {
         when:
-            DotaApiClient testObj = new DotaApiClient('key', 'www.baseurl.com');
+            Dota2ApiClient testObj = new Dota2ApiClient('key', 'www.baseurl.com');
         then:
             testObj.baseUrl == 'www.baseurl.com'
             testObj.key == 'key'
@@ -13,7 +13,7 @@ class DotaApiClientTest extends BaseSpec {
 
     def 'when only the key is sent the base url is set to the default' (){
         when:
-            DotaApiClient testObj = new DotaApiClient('key');
+            Dota2ApiClient testObj = new Dota2ApiClient('key');
         then:
             testObj.baseUrl == 'https://api.steampowered.com'
             testObj.key == 'key'

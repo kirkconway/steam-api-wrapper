@@ -39,6 +39,7 @@ class GetMatchDetailsResult {
     int negativeVotes
     @JsonProperty(value = 'game_mode')
     int gameMode
+    int engine
 
 
 

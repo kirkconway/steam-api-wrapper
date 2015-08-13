@@ -15,7 +15,7 @@ class GetMatchDetailsRequestSpec extends BaseSpec {
         when:
             GetMatchDetails getMatchDetails =  testObj.submit()
         then:
-            getMatchDetails.result.matchId == 1466186419
+            getMatchDetails.result.matchId == 1706083430
 
     }
 
