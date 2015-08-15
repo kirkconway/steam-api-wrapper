@@ -1,6 +1,5 @@
 package com.discobeard.dota2.api.wrapper.deserializers
 
-import com.discobeard.dota2.api.wrapper.domain.SteamId
 import com.discobeard.dota2.api.wrapper.domain.Team
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonProcessingException
@@ -12,7 +11,7 @@ class BooleanToTeamDeserializer extends  JsonDeserializer<Team> {
     @Override
     Team deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
         if(p.booleanValue){
-            return Team.Radient
+            return Team.Radiant
         }
 
         Team.Dire

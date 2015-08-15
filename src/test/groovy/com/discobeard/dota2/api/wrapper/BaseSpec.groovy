@@ -42,6 +42,16 @@ class BaseSpec extends Specification {
         )
     }
 
+    public void returnItems() {
+        mockServer.when(
+                new HttpRequest())
+                .respond(
+                new HttpResponse()
+                        .withBody(new File("src/test/resources/responses/steam/getGameItemsResponse.json").text)
+                        .withHeader('Content-Type', 'application/json')
+        )
+    }
+
     public void returnMatchHistory() {
         mockServer.when(
                 new HttpRequest())

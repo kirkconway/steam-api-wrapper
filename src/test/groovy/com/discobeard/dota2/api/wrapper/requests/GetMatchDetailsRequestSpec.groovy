@@ -2,12 +2,11 @@ package com.discobeard.dota2.api.wrapper.requests
 
 import com.discobeard.dota2.api.wrapper.BaseSpec
 import com.discobeard.dota2.api.wrapper.domain.LeaverStatus
-import com.discobeard.dota2.api.wrapper.domain.Team
 import com.discobeard.dota2.api.wrapper.to.getmatchdetails.GetMatchDetails
 import com.sun.jersey.api.client.Client
 
 import static com.discobeard.dota2.api.wrapper.domain.Team.Dire
-import static com.discobeard.dota2.api.wrapper.domain.Team.Radient
+import static com.discobeard.dota2.api.wrapper.domain.Team.Radiant
 
 class GetMatchDetailsRequestSpec extends BaseSpec {
 
@@ -21,9 +20,9 @@ class GetMatchDetailsRequestSpec extends BaseSpec {
             GetMatchDetails getMatchDetails =  testObj.submit()
         then:
             getMatchDetails.result.matchId == 1714311165
-            getMatchDetails.result.winner == Radient
+            getMatchDetails.result.winner == Radiant
             getMatchDetails.result.players[0].leaverStatus == LeaverStatus.None
-            getMatchDetails.result.players[0].team == Radient
+            getMatchDetails.result.players[0].team == Radiant
             getMatchDetails.result.players[6].team == Dire
 
     }

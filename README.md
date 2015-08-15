@@ -14,4 +14,8 @@ getMatchDetails
 
 getHeroes
 
+getGameItems
+
+getPlayerSummaries
+
 

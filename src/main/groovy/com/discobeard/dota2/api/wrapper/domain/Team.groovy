@@ -1,7 +1,7 @@
 package com.discobeard.dota2.api.wrapper.domain
 
 enum Team {
-    Radient("radient"), Dire("dire")
+    Radiant("radiant"), Dire("dire")
 
     String name
 

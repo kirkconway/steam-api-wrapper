@@ -13,7 +13,7 @@ class Match {
     @JsonProperty(value = 'lobby_type')
     String lobbyType
     @JsonProperty(value = 'radiant_team_id')
-    int radientTeamId
+    int radiantTeamId
     @JsonProperty(value = 'dire_team_id')
     int direTeamId
 

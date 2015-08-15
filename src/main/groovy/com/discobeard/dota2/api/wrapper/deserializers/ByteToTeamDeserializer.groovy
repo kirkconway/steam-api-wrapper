@@ -12,6 +12,6 @@ class ByteToTeamDeserializer extends  JsonDeserializer<Team> {
         if(p.intValue>=128){
             return Team.Dire
         }
-        Team.Radient
+        Team.Radiant
     }
 }
