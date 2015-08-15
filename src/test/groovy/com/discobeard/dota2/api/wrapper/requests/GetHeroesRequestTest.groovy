@@ -18,4 +18,12 @@ class GetHeroesRequestTest extends BaseSpec {
             getHeroes.result.count == 110
             getHeroes.result.status == 200
     }
+
+    def 'with language correct adds the language param'(){
+        when:
+            testObj.withLanguage("en_us")
+        then:
+            testObj.resource == 'http://localhost:1080/IEconDOTA2_570/GetHeroes/v0001/?key=key&language=en_us'
+
+    }
 }

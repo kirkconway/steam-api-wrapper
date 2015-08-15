@@ -1,6 +1,9 @@
 package com.discobeard.dota2.api.wrapper.to.getmatchdetails
 
+import com.discobeard.dota2.api.wrapper.deserializers.BooleanToTeamDeserializer
+import com.discobeard.dota2.api.wrapper.domain.Team
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 
 class GetMatchDetailsResult {
 
@@ -12,7 +15,9 @@ class GetMatchDetailsResult {
     Player[] players
 
     @JsonProperty(value = 'radiant_win')
-    boolean radiantWin
+    @JsonDeserialize(using=BooleanToTeamDeserializer.class, as = Team.class)
+    Team winner
+
     @JsonProperty(value = 'duration')
     long durationInSeconds
     @JsonProperty(value = 'start_time')

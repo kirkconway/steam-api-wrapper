@@ -1,13 +1,22 @@
 package com.discobeard.dota2.api.wrapper.to.getmatchdetails
 
+import com.discobeard.dota2.api.wrapper.deserializers.ByteToTeamDeserializer
+import com.discobeard.dota2.api.wrapper.deserializers.LeaverStatusDeserializer
+import com.discobeard.dota2.api.wrapper.domain.LeaverStatus
+import com.discobeard.dota2.api.wrapper.domain.Team
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 
 class Player {
 
     @JsonProperty(value = 'account_id')
     long accountId
+
+    @JsonDeserialize(using=ByteToTeamDeserializer.class, as = Team.class)
     @JsonProperty(value = 'player_slot')
-    long playerSlot
+    Team team
+
+
     @JsonProperty(value = 'hero_id')
     int heroId
     @JsonProperty(value = 'item_0')
@@ -25,8 +34,14 @@ class Player {
     int kills
     int deaths
     int assists
+
+    @JsonProperty(value = 'additional_units')
+    AdditionalUnits[] additionalUnits
+
     @JsonProperty(value = 'leaver_status')
-    int leaverStatus
+    @JsonDeserialize(using=LeaverStatusDeserializer.class, as = LeaverStatus.class)
+    LeaverStatus leaverStatus
+
     int gold
     @JsonProperty(value = 'last_hits')
     int lastHits

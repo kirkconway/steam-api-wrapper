@@ -9,7 +9,9 @@ client.getMatchHistoryRequest().withAccountId("12131212").submit()
 # Supported API
 
 getMatchHistory
+
 getMatchDetails
+
 getHeroes
 
 

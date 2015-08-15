@@ -8,8 +8,7 @@ class GetMatchHistoryRequest extends Request<GetMatchHistory> {
     private static final PATH = 'IDOTA2Match_570/GetMatchHistory/V001/'
 
     public GetMatchHistoryRequest(Client client, String baseUrl, String key){
-        resource = "${baseUrl}/${PATH}?key=${key}"
-        this.client = client
+        super(client, baseUrl, PATH, key)
         this.returnType = GetMatchHistory.class
     }
 

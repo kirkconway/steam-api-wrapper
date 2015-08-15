@@ -8,8 +8,7 @@ class GetHeroesRequest extends Request<GetHeroes> {
     private static final PATH = 'IEconDOTA2_570/GetHeroes/v0001/'
 
     public GetHeroesRequest(Client client, String baseUrl, String key){
-        resource = "${baseUrl}/${PATH}?key=${key}"
-        this.client = client
+        super(client, baseUrl, PATH, key)
         this.returnType = GetHeroes.class
     }
 

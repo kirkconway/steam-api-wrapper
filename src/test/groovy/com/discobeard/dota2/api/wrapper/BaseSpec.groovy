@@ -52,4 +52,14 @@ class BaseSpec extends Specification {
         )
     }
 
+    public void returnPlayerSummaries() {
+        mockServer.when(
+                new HttpRequest())
+                .respond(
+                new HttpResponse()
+                        .withBody(new File("src/test/resources/responses/steam/getPlayerSummariesResponse.json").text)
+                        .withHeader('Content-Type', 'application/json')
+        )
+    }
+
 }

@@ -6,9 +6,14 @@ import com.sun.jersey.api.client.WebResource
 
 abstract class Request<T> {
 
-    protected Client client
     protected String resource
     protected Class returnType
+    private Client client
+
+    public Request(Client client, String baseUrl,String path, String key){
+        resource = "${baseUrl}/${path}?key=${key}"
+        this.client = client
+    }
 
     public T submit(){
         WebResource webResource = client.resource(resource)
