@@ -1,6 +1,8 @@
 package com.discobeard.dota2.api.wrapper.to.getmatchdetails
 
 import com.discobeard.dota2.api.wrapper.deserializers.BooleanToTeamDeserializer
+import com.discobeard.dota2.api.wrapper.deserializers.PlayerDeserializer
+import com.discobeard.dota2.api.wrapper.domain.MatchDetailsPlayer
 import com.discobeard.dota2.api.wrapper.domain.Team
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
@@ -12,7 +14,8 @@ class GetMatchDetailsResult {
     @JsonProperty(value = 'match_seq_num')
     int matchSequenceNumber
 
-    Player[] players
+    @JsonDeserialize(using=PlayerDeserializer.class, as = List.class)
+    List<MatchDetailsPlayer> players
 
     @JsonProperty(value = 'radiant_win')
     @JsonDeserialize(using=BooleanToTeamDeserializer.class, as = Team.class)
@@ -46,8 +49,19 @@ class GetMatchDetailsResult {
     int gameMode
     int engine
 
-
-
-
+    @JsonProperty(value = 'dire_team_id')
+    int direTeamId
+    @JsonProperty(value = 'dire_name')
+    String direTeamName
+    @JsonProperty(value = 'dire_logo')
+    String direLogo
+    @JsonProperty(value = 'dire_team_complete')
+    String direTeamComplete
+    @JsonProperty(value = 'dire_captain')
+    int direCaptain
+    @JsonProperty(value = 'radiant_captain')
+    int radiantCaptain
+    @JsonProperty(value = 'picks_bans')
+    PicksAndBans[] picksAndBans
 
 }

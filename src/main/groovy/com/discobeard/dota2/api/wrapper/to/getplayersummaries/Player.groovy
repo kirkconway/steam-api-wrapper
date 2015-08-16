@@ -26,8 +26,11 @@ class Player {
     String locstatecode
     String loccitycode
     String loccityid
+    String personastateflags
     String gameid
     String gameextrainfo
     String gameserverip
-    String personastateflags
+    String gameserversteamid
+    String lobbysteamid
+
 }

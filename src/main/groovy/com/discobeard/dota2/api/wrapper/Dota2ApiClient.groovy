@@ -1,5 +1,6 @@
 package com.discobeard.dota2.api.wrapper
 
+import com.discobeard.dota2.api.wrapper.requests.GetGameItemsRequest
 import com.discobeard.dota2.api.wrapper.requests.GetHeroesRequest
 import com.discobeard.dota2.api.wrapper.requests.GetMatchDetailsRequest
 import com.discobeard.dota2.api.wrapper.requests.GetMatchHistoryRequest
@@ -37,5 +38,9 @@ class Dota2ApiClient {
 
     public GetPlayerSummariesRequest getPlayerSummariesRequest() {
         new GetPlayerSummariesRequest(client, baseUrl, key)
+    }
+
+    public GetGameItemsRequest getGameItemsRequest(){
+        new GetGameItemsRequest(client, baseUrl, key)
     }
 }
