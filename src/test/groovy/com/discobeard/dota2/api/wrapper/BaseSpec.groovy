@@ -72,4 +72,14 @@ class BaseSpec extends Specification {
         )
     }
 
+    public void returnUnparsablePlayerSummaries() {
+        mockServer.when(
+                new HttpRequest())
+                .respond(
+                new HttpResponse()
+                        .withBody('{"cantParse":"me"}')
+                        .withHeader('Content-Type', 'application/json')
+        )
+    }
+
 }
