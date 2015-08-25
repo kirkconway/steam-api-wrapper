@@ -22,7 +22,7 @@ class MatchDetailsPlayer {
     int heroDamage
     int towerDamage
     int heroHealing
-    Ability[] abilities
+    List<Ability> abilities
     int level
 
 
