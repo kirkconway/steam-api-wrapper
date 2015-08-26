@@ -33,7 +33,7 @@ class GetMatchDetailsResult {
     int radiantBarracksStatus
     @JsonProperty(value = 'barracks_status_dire')
     int direBarracksStatus
-    String cluster
+    int cluster
     @JsonProperty(value = 'first_blood_time')
     int firstBloodTimeInSeconds
     @JsonProperty(value = 'lobby_type')
