@@ -1,7 +1,9 @@
 package com.discobeard.dota2.api.wrapper.to.getmatchdetails
 
 import com.discobeard.dota2.api.wrapper.deserializers.BooleanToTeamDeserializer
+import com.discobeard.dota2.api.wrapper.deserializers.LobbyTypeDeserializer
 import com.discobeard.dota2.api.wrapper.deserializers.PlayerDeserializer
+import com.discobeard.dota2.api.wrapper.domain.LobbyType
 import com.discobeard.dota2.api.wrapper.domain.MatchDetailsPlayer
 import com.discobeard.dota2.api.wrapper.domain.Team
 import com.fasterxml.jackson.annotation.JsonProperty
@@ -37,7 +39,8 @@ class GetMatchDetailsResult {
     @JsonProperty(value = 'first_blood_time')
     int firstBloodTimeInSeconds
     @JsonProperty(value = 'lobby_type')
-    int lobbyType
+    @JsonDeserialize(using=LobbyTypeDeserializer.class, as = LobbyType.class)
+    LobbyType lobbyType
     @JsonProperty(value = 'human_players')
     int humanPlayers
     int leagueid
