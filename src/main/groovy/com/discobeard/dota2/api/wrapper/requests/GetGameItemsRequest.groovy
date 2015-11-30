@@ -1,7 +1,8 @@
 package com.discobeard.dota2.api.wrapper.requests
 
 import com.discobeard.dota2.api.wrapper.to.getgameitems.GetGameItems
-import com.sun.jersey.api.client.Client
+
+import javax.ws.rs.client.Client
 
 class GetGameItemsRequest extends Request<GetGameItems>{
 

@@ -3,6 +3,8 @@ package com.discobeard.dota2.api.wrapper.requests
 import com.discobeard.dota2.api.wrapper.to.getmatchhistory.GetMatchHistory
 import com.sun.jersey.api.client.Client
 
+import javax.ws.rs.client.Client
+
 class GetMatchHistoryRequest extends Request<GetMatchHistory> {
 
     private static final PATH = 'IDOTA2Match_570/GetMatchHistory/V001/'

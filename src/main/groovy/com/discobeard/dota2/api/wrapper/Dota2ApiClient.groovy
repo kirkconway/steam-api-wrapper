@@ -5,7 +5,9 @@ import com.discobeard.dota2.api.wrapper.requests.GetHeroesRequest
 import com.discobeard.dota2.api.wrapper.requests.GetMatchDetailsRequest
 import com.discobeard.dota2.api.wrapper.requests.GetMatchHistoryRequest
 import com.discobeard.dota2.api.wrapper.requests.GetPlayerSummariesRequest
-import com.sun.jersey.api.client.Client
+
+import javax.ws.rs.client.Client
+import javax.ws.rs.client.ClientBuilder
 
 class Dota2ApiClient {
 
@@ -16,7 +18,7 @@ class Dota2ApiClient {
     private String baseUrl
     private String key
 
-    Client client = Client.create()
+    Client client = ClientBuilder.newClient()
 
     public Dota2ApiClient(String key, String baseUrl = DEFAULT_BASE_URL, String language = DEFAULT_LANGUAGE) {
         this.key = key

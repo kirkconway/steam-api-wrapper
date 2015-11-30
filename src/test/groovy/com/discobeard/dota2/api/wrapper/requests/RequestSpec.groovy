@@ -3,11 +3,13 @@ package com.discobeard.dota2.api.wrapper.requests
 import com.discobeard.dota2.api.wrapper.BaseSpec
 import com.discobeard.dota2.api.wrapper.exception.SteamException
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException
-import com.sun.jersey.api.client.Client
+
+import javax.ws.rs.client.Client
+import javax.ws.rs.client.ClientBuilder
 
 class RequestSpec extends BaseSpec {
 
-    Client client = Client.create()
+    Client client = ClientBuilder.newClient()
 
     def 'when steam does not respond or entity does not parse then a SteamException is thrown' (){
         given:

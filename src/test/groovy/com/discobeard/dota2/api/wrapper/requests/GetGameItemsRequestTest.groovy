@@ -2,11 +2,13 @@ package com.discobeard.dota2.api.wrapper.requests
 
 import com.discobeard.dota2.api.wrapper.BaseSpec
 import com.discobeard.dota2.api.wrapper.to.getgameitems.GetGameItems
-import com.sun.jersey.api.client.Client
+
+import javax.ws.rs.client.Client
+import javax.ws.rs.client.ClientBuilder
 
 class GetGameItemsRequestTest extends BaseSpec {
 
-    Client client = Client.create()
+    Client client = ClientBuilder.newClient()
     GetGameItemsRequest testObj = new GetGameItemsRequest(client, "http://localhost:1080","key")
 
     def 'match details are converted correctly'(){

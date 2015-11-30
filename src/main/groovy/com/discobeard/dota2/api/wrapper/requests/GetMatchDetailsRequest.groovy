@@ -1,7 +1,8 @@
 package com.discobeard.dota2.api.wrapper.requests
 
 import com.discobeard.dota2.api.wrapper.to.getmatchdetails.GetMatchDetails
-import com.sun.jersey.api.client.Client
+
+import javax.ws.rs.client.Client
 
 class GetMatchDetailsRequest extends Request {
 

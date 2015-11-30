@@ -1,7 +1,7 @@
 package com.discobeard.dota2.api.wrapper.requests
 
 import com.discobeard.dota2.api.wrapper.to.getheroes.GetHeroes
-import com.sun.jersey.api.client.Client
+import javax.ws.rs.client.Client
 
 class GetHeroesRequest extends Request<GetHeroes> {
 

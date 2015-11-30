@@ -3,11 +3,13 @@ package com.discobeard.dota2.api.wrapper.requests
 import com.discobeard.dota2.api.wrapper.BaseSpec
 import com.discobeard.dota2.api.wrapper.domain.SteamId
 import com.discobeard.dota2.api.wrapper.to.getplayersummaries.GetPlayerSummaries
-import com.sun.jersey.api.client.Client
+
+import javax.ws.rs.client.Client
+import javax.ws.rs.client.ClientBuilder
 
 class GetPlayerSummariesRequestSpec extends BaseSpec {
 
-    Client client = Client.create()
+    Client client = ClientBuilder.newClient()
     GetPlayerSummariesRequest testObj = new GetPlayerSummariesRequest(client,"http://localhost:1080","key")
 
     def 'player summaries are converted correctly'(){

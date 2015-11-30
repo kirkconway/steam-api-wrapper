@@ -2,9 +2,10 @@ package com.discobeard.dota2.api.wrapper.requests
 
 import com.discobeard.dota2.api.wrapper.exception.SteamException
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException
-import com.sun.jersey.api.client.Client
-import com.sun.jersey.api.client.ClientResponse
-import com.sun.jersey.api.client.WebResource
+import javax.ws.rs.client.Client
+import javax.ws.rs.client.Invocation
+import javax.ws.rs.client.WebTarget
+import javax.ws.rs.core.Response
 
 abstract class Request<T> {
 
@@ -19,17 +20,20 @@ abstract class Request<T> {
 
     public T submit() throws SteamException {
         try {
-            WebResource webResource = client.resource(resource)
+            WebTarget webTarget = client.target(resource)
             System.out.println("submitting ${resource}")
-            ClientResponse response = webResource.get(ClientResponse.class)
-            response.getEntity(returnType)
+
+            Invocation.Builder invocationBuilder = webTarget.request()
+
+            Response response = invocationBuilder.get()
+            response.readEntity(returnType)
         }
         catch (Exception e){
             if(e.cause instanceof UnrecognizedPropertyException){
-                throw new SteamException("Could not parse response from steam", e.cause)
+                throw new SteamException('Could not parse response from steam', e.cause)
             }
 
-            throw new SteamException("Could not connect to the steam api", e.cause)
+            throw new SteamException('Could not connect to the steam api', e.cause)
 
         }
     }
