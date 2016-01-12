@@ -2,7 +2,7 @@ package com.discobeard.dota2.api.wrapper.requests
 
 import com.discobeard.dota2.api.wrapper.BaseSpec
 import com.discobeard.dota2.api.wrapper.exception.SteamException
-import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException
+import com.fasterxml.jackson.core.JsonParseException
 
 import javax.ws.rs.client.Client
 import javax.ws.rs.client.ClientBuilder
@@ -30,9 +30,10 @@ class RequestSpec extends BaseSpec {
         when:
             testObj.submit()
         then:
+            testObj
             SteamException ex = thrown()
             ex.message == "Could not parse response from steam"
-            ex.cause instanceof UnrecognizedPropertyException
+            ex.cause instanceof JsonParseException
     }
 
 

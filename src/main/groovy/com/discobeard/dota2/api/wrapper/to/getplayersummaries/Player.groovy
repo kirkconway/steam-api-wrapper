@@ -2,8 +2,10 @@ package com.discobeard.dota2.api.wrapper.to.getplayersummaries
 
 import com.discobeard.dota2.api.wrapper.deserializers.SteamIdDeserializer
 import com.discobeard.dota2.api.wrapper.domain.SteamId
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 class Player {
 
     @JsonDeserialize(using=SteamIdDeserializer.class, as = SteamId.class)

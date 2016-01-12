@@ -22,64 +22,42 @@ class BaseSpec extends Specification {
         mockServer.stop()
     }
 
-    public void returnMatchDetails() {
+    private mock(String body){
         mockServer.when(
                 new HttpRequest())
                 .respond(
                 new HttpResponse()
-                        .withBody(new File("src/test/resources/responses/steam/getMatchDetailsResponse.json").text)
+                        .withBody(body)
                         .withHeader('Content-Type', 'application/json')
-                )
+        )
+    }
+
+    public void returnMatchDetails() {
+        mock(new File("src/test/resources/responses/steam/getMatchDetailsResponse.json").text)
     }
 
     public void returnHeroes() {
-        mockServer.when(
-                new HttpRequest())
-                .respond(
-                new HttpResponse()
-                        .withBody(new File("src/test/resources/responses/steam/getHerosResponse.json").text)
-                        .withHeader('Content-Type', 'application/json')
-        )
+        mock(new File("src/test/resources/responses/steam/getHerosResponse.json").text)
     }
 
     public void returnItems() {
-        mockServer.when(
-                new HttpRequest())
-                .respond(
-                new HttpResponse()
-                        .withBody(new File("src/test/resources/responses/steam/getGameItemsResponse.json").text)
-                        .withHeader('Content-Type', 'application/json')
-        )
+        mock(new File("src/test/resources/responses/steam/getGameItemsResponse.json").text)
     }
 
     public void returnMatchHistory() {
-        mockServer.when(
-                new HttpRequest())
-                .respond(
-                new HttpResponse()
-                        .withBody(new File("src/test/resources/responses/steam/getMatchHistoryResponse.json").text)
-                        .withHeader('Content-Type', 'application/json')
-        )
+        mock(new File("src/test/resources/responses/steam/getMatchHistoryResponse.json").text)
     }
 
     public void returnPlayerSummaries() {
-        mockServer.when(
-                new HttpRequest())
-                .respond(
-                new HttpResponse()
-                        .withBody(new File("src/test/resources/responses/steam/getPlayerSummariesResponse.json").text)
-                        .withHeader('Content-Type', 'application/json')
-        )
+        mock(new File("src/test/resources/responses/steam/getPlayerSummariesResponse.json").text)
+    }
+
+    public void returnGetRecentlyPlayedGames() {
+        mock(new File("src/test/resources/responses/steam/getRecentlyPlayedGamesResponse.json").text)
     }
 
     public void returnUnparsablePlayerSummaries() {
-        mockServer.when(
-                new HttpRequest())
-                .respond(
-                new HttpResponse()
-                        .withBody('{"cantParse":"me"}')
-                        .withHeader('Content-Type', 'application/json')
-        )
+        mock('cantParse":"me"}')
     }
 
 }

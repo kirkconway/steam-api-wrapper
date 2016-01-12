@@ -18,4 +18,6 @@ getGameItems
 
 getPlayerSummaries
 
+getRecentlyPlayedGames
+
 

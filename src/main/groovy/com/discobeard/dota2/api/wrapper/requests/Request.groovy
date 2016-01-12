@@ -1,6 +1,7 @@
 package com.discobeard.dota2.api.wrapper.requests
 
 import com.discobeard.dota2.api.wrapper.exception.SteamException
+import com.fasterxml.jackson.core.JsonParseException
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException
 import javax.ws.rs.client.Client
 import javax.ws.rs.client.Invocation
@@ -29,7 +30,7 @@ abstract class Request<T> {
             response.readEntity(returnType)
         }
         catch (Exception e){
-            if(e.cause instanceof UnrecognizedPropertyException){
+            if(e.cause instanceof UnrecognizedPropertyException || e.cause instanceof JsonParseException){
                 throw new SteamException('Could not parse response from steam', e.cause)
             }
 

@@ -6,9 +6,11 @@ import com.discobeard.dota2.api.wrapper.deserializers.PlayerDeserializer
 import com.discobeard.dota2.api.wrapper.domain.LobbyType
 import com.discobeard.dota2.api.wrapper.domain.MatchDetailsPlayer
 import com.discobeard.dota2.api.wrapper.domain.Team
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 class GetMatchDetailsResult {
 
     @JsonProperty(value = 'match_id')

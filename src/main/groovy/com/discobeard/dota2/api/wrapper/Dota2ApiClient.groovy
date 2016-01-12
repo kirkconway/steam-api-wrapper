@@ -1,10 +1,6 @@
 package com.discobeard.dota2.api.wrapper
 
-import com.discobeard.dota2.api.wrapper.requests.GetGameItemsRequest
-import com.discobeard.dota2.api.wrapper.requests.GetHeroesRequest
-import com.discobeard.dota2.api.wrapper.requests.GetMatchDetailsRequest
-import com.discobeard.dota2.api.wrapper.requests.GetMatchHistoryRequest
-import com.discobeard.dota2.api.wrapper.requests.GetPlayerSummariesRequest
+import com.discobeard.dota2.api.wrapper.requests.*
 
 import javax.ws.rs.client.Client
 import javax.ws.rs.client.ClientBuilder
@@ -44,5 +40,9 @@ class Dota2ApiClient {
 
     public GetGameItemsRequest getGameItemsRequest(){
         new GetGameItemsRequest(client, baseUrl, key)
+    }
+
+    public GetRecentlyPlayedGamesRequest getRecentlyPlayedGames(){
+        new GetRecentlyPlayedGamesRequest(client, baseUrl, key)
     }
 }
