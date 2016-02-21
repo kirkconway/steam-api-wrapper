@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 class GetMatchDetailsResult {
 
     @JsonProperty(value = 'match_id')
-    int matchId
+    long matchId
     @JsonProperty(value = 'match_seq_num')
     int matchSequenceNumber
 
