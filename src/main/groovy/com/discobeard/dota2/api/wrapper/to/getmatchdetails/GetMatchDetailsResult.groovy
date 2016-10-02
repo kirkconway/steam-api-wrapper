@@ -16,7 +16,7 @@ class GetMatchDetailsResult {
     @JsonProperty(value = 'match_id')
     long matchId
     @JsonProperty(value = 'match_seq_num')
-    int matchSequenceNumber
+    long matchSequenceNumber
 
     @JsonDeserialize(using=PlayerDeserializer.class, as = List.class)
     List<MatchDetailsPlayer> players
