@@ -24,7 +24,7 @@ dependencies {
 }
 
 jar {
-    baseName = 'dota2-api-wrapper'
+    baseName = 'steam-api-wrapper'
     version = '0.1'
 }
 

@@ -1,10 +1,10 @@
-# dota2-api-wrapper
-Groovy wrapper for the dota 2 api
+# steam-api-wrapper
+Groovy wrapper for steam api's
 
 
 # Usage
-Dota2ApiClient client = new Dota2ApiClient('key');
-client.getMatchHistoryRequest().withAccountId("12131212").submit()
+SteamApiWrapper wrapper = new SteamApiWrapper('key');
+wrapper.getMatchHistoryRequest().withAccountId("12131212").submit()
 
 # Supported API
 
