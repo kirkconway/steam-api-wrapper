@@ -9,13 +9,13 @@ class GetRecentlyPlayedGamesRequest extends Request<GetRecentlyPlayedGames> {
 
     private static final PATH = 'IPlayerService/GetRecentlyPlayedGames/v0001/'
 
-    public GetRecentlyPlayedGamesRequest(Client client, String baseUrl, String key){
+    GetRecentlyPlayedGamesRequest(Client client, String baseUrl, String key) {
         super(client, baseUrl, PATH, key)
         this.returnType = GetRecentlyPlayedGames.class
     }
 
-    public GetRecentlyPlayedGamesRequest withSteamId(String steamIds){
-        resource+= "&steamid=$steamIds"
+    GetRecentlyPlayedGamesRequest withSteamId(String steamIds) {
+        resource += "&steamid=$steamIds"
         this
     }
 }

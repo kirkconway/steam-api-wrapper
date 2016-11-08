@@ -14,8 +14,9 @@ class GetGameItemsRequest extends Request<GetGameItems> {
         returnType = GetGameItems.class
     }
 
-    public GetGameItemsRequest withLanguage(String language){
+    GetGameItemsRequest withLanguage(String language) {
         resource += "&language=${language}"
         this
     }
+
 }

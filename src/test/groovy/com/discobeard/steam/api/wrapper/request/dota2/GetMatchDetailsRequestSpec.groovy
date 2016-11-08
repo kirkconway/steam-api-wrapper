@@ -1,26 +1,19 @@
-package com.discobeard.steam.api.wrapper.request
+package com.discobeard.steam.api.wrapper.request.dota2
 
 import com.discobeard.steam.api.wrapper.BaseSpec
-import com.discobeard.steam.api.wrapper.request.dota2.GetMatchDetailsRequest
-import com.discobeard.steam.api.wrapper.response.dota2.getmatchdetails.GetMatchDetails
 import com.discobeard.steam.api.wrapper.domain.LeaverStatus
-
-import javax.ws.rs.client.Client
-import javax.ws.rs.client.ClientBuilder
+import com.discobeard.steam.api.wrapper.response.dota2.getmatchdetails.GetMatchDetails
 
 import static com.discobeard.steam.api.wrapper.domain.Team.Dire
 import static com.discobeard.steam.api.wrapper.domain.Team.Radiant
 
 class GetMatchDetailsRequestSpec extends BaseSpec {
 
-    Client client = ClientBuilder.newClient()
-    GetMatchDetailsRequest testObj = new GetMatchDetailsRequest(client, "http://localhost:1080","key")
-
-    def 'match details are converted correctly'(){
+    def 'match details are converted correctly'() {
         given:
             returnMatchDetails()
         when:
-            GetMatchDetails getMatchDetails =  testObj.submit()
+            GetMatchDetails getMatchDetails = steamApiWrapper.dota2.getMatchDetailsRequest().submit()
         then:
             getMatchDetails.result.matchId == 1714311165
             getMatchDetails.result.winner == Radiant
@@ -32,9 +25,9 @@ class GetMatchDetailsRequestSpec extends BaseSpec {
 
     def 'with matchid correct adds the match id'() {
         when:
-            testObj.withMatchId("12341")
+            GetMatchDetailsRequest request = steamApiWrapper.dota2.getMatchDetailsRequest().withMatchId("12341")
         then:
-            testObj.resource == 'http://localhost:1080/IDOTA2Match_570/GetMatchDetails/V001/?key=key&match_id=12341'
+            request.resource == 'http://localhost:1080/IDOTA2Match_570/GetMatchDetails/V001/?key=key&match_id=12341'
     }
 
 }

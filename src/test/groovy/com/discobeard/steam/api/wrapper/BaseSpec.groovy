@@ -5,12 +5,16 @@ import org.mockserver.integration.ClientAndServer
 import org.mockserver.model.HttpRequest
 import org.mockserver.model.HttpResponse
 import spock.lang.Specification
-import static org.mockserver.integration.ClientAndProxy.startClientAndProxy;
-import static org.mockserver.integration.ClientAndServer.startClientAndServer;
+
+import static org.mockserver.integration.ClientAndProxy.startClientAndProxy
+import static org.mockserver.integration.ClientAndServer.startClientAndServer
 
 class BaseSpec extends Specification {
+
     private static ClientAndProxy proxy;
     private static ClientAndServer mockServer;
+
+    SteamApiWrapper steamApiWrapper = new SteamApiWrapper("key",  "http://localhost:1080")
 
     def setupSpec() {
         mockServer = startClientAndServer(1080)
@@ -23,34 +27,42 @@ class BaseSpec extends Specification {
     }
 
     public void returnMatchDetails() {
-        mock(new File("src/test/resources/responses/steam/getMatchDetailsResponse.json").text)
+        mock(new File("src/test/resources/responses/steam/dota2/getMatchDetailsResponse.json").text)
     }
 
     public void returnHeroes() {
-        mock(new File("src/test/resources/responses/steam/getHerosResponse.json").text)
+        mock(new File("src/test/resources/responses/steam/dota2/getHerosResponse.json").text)
     }
 
-    public void returnItems() {
-        mock(new File("src/test/resources/responses/steam/getGameItemsResponse.json").text)
+    public void steamReturnsGetItemsResponse() {
+        mock(new File("src/test/resources/responses/steam/dota2/getGameItemsResponse.json").text)
     }
 
-    public void returnMatchHistory() {
-        mock(new File("src/test/resources/responses/steam/getMatchHistoryResponse.json").text)
+    public void steamReturnsMatchHistoryResponse() {
+        mock(new File("src/test/resources/responses/steam/dota2/getMatchHistoryResponse.json").text)
     }
 
     public void returnPlayerSummaries() {
-        mock(new File("src/test/resources/responses/steam/getPlayerSummariesResponse.json").text)
+        mock(new File("src/test/resources/responses/steam/player/getPlayerSummariesResponse.json").text)
     }
 
     public void returnGetRecentlyPlayedGames() {
-        mock(new File("src/test/resources/responses/steam/getRecentlyPlayedGamesResponse.json").text)
+        mock(new File("src/test/resources/responses/steam/player/getRecentlyPlayedGamesResponse.json").text)
     }
 
     public void returnUnparsablePlayerSummaries() {
         mock('cantParse":"me"}')
     }
 
-    private mock(String body){
+    public void steamReturnsSupportedApiListResponse() {
+        mock(new File("src/test/resources/responses/steam/api/getSupportedApiListResponse.json").text)
+    }
+
+    public void steamReturnsGetServerInfoResponse() {
+        mock(new File("src/test/resources/responses/steam/api/getServerInfoResponse.json").text)
+    }
+
+    private mock(String body) {
         mockServer.when(
                 new HttpRequest())
                 .respond(

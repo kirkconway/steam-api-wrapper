@@ -9,12 +9,12 @@ class GetPlayerSummariesRequest extends Request<GetPlayerSummaries> {
 
     private static final PATH = 'ISteamUser/GetPlayerSummaries/v0002/'
 
-    public GetPlayerSummariesRequest(Client client, String baseUrl, String key){
+    GetPlayerSummariesRequest(Client client, String baseUrl, String key){
         super(client, baseUrl, PATH, key)
         this.returnType = GetPlayerSummaries.class
     }
 
-    public GetPlayerSummariesRequest withSteamIds(String[] steamIds){
+    GetPlayerSummariesRequest withSteamIds(String[] steamIds){
         resource+= "&steamids=${getSteamAccountIdString(steamIds)}"
         this
     }

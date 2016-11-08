@@ -1,21 +1,15 @@
-package com.discobeard.steam.api.wrapper.request
+package com.discobeard.steam.api.wrapper.request.player
 
 import com.discobeard.steam.api.wrapper.BaseSpec
-import com.discobeard.steam.api.wrapper.request.player.GetRecentlyPlayedGamesRequest
 import com.discobeard.steam.api.wrapper.response.player.getrecentlyplayedgames.GetRecentlyPlayedGames
 
-import javax.ws.rs.client.Client
-import javax.ws.rs.client.ClientBuilder
-
 class GetRecentlyPlayedGamesRequestSpec extends BaseSpec {
-    Client client = ClientBuilder.newClient()
-    GetRecentlyPlayedGamesRequest testObj = new GetRecentlyPlayedGamesRequest(client, "http://localhost:1080", "key")
 
     def 'player summaries are converted correctly'() {
         given:
             returnGetRecentlyPlayedGames()
         when:
-            GetRecentlyPlayedGames recentlyPlayedGames = testObj.submit()
+            GetRecentlyPlayedGames recentlyPlayedGames = steamApiWrapper.player.getRecentlyPlayedGamesRequest().submit()
         then:
             recentlyPlayedGames.response.total_count == 5
             recentlyPlayedGames.response.games.size() == 5

@@ -28,10 +28,9 @@ class SteamApiWrapper {
         player = new PlayerWrapper(key: key, baseUrl: baseUrl, client: client)
     }
 
-    public Client createClient() {
+    private static Client createClient() {
         JacksonJsonProvider jacksonJsonProvider = new JacksonJaxbJsonProvider()
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         ClientBuilder.newClient(new ClientConfig(jacksonJsonProvider))
     }
-
 }

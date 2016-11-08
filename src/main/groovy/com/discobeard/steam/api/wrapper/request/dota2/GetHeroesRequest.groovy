@@ -8,12 +8,12 @@ class GetHeroesRequest extends Request<GetHeroes> {
 
     private static final PATH = 'IEconDOTA2_570/GetHeroes/v0001/'
 
-    public GetHeroesRequest(Client client, String baseUrl, String key){
+    GetHeroesRequest(Client client, String baseUrl, String key) {
         super(client, baseUrl, PATH, key)
         this.returnType = GetHeroes.class
     }
 
-    public GetHeroesRequest withLanguage(String language){
+    GetHeroesRequest withLanguage(String language) {
         resource += "&language=${language}"
         this
     }
