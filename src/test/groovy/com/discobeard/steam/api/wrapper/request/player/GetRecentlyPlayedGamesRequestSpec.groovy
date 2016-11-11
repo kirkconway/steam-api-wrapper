@@ -21,4 +21,13 @@ class GetRecentlyPlayedGamesRequestSpec extends BaseSpec {
             recentlyPlayedGames.response.games[0].imageIconUrl == '858961e95fbf869f136e1770d586e0caefd4cfac'
             recentlyPlayedGames.response.games[0].imageLogoUrl == '783399da7d865b7b5b1560891b1e9463345e8fa9'
     }
+
+    def 'attaches steam id to request' () {
+        when:
+            GetRecentlyPlayedGamesRequest request = steamApiWrapper.player.getRecentlyPlayedGamesRequest().withSteamId("1")
+        then:
+            request.resource.contains("&steamid=1")
+    }
+
+
 }

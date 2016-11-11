@@ -2,14 +2,13 @@ package com.discobeard.steam.api.wrapper.request.dota2
 
 import com.discobeard.steam.api.wrapper.request.Request
 import com.discobeard.steam.api.wrapper.response.dota2.getmatchhistory.GetMatchHistory
-
-import javax.ws.rs.client.Client
+import org.asynchttpclient.AsyncHttpClient
 
 class GetMatchHistoryRequest extends Request<GetMatchHistory> {
 
     private static final PATH = 'IDOTA2Match_570/GetMatchHistory/V001/'
 
-    GetMatchHistoryRequest(Client client, String baseUrl, String key) {
+    GetMatchHistoryRequest(AsyncHttpClient client, String baseUrl, String key) {
         super(client, baseUrl, PATH, key)
         this.returnType = GetMatchHistory.class
     }

@@ -3,18 +3,13 @@ package com.discobeard.steam.api.wrapper
 import com.discobeard.steam.api.wrapper.request.api.ApiWrapper
 import com.discobeard.steam.api.wrapper.request.dota2.Dota2Wrapper
 import com.discobeard.steam.api.wrapper.request.player.PlayerWrapper
-import com.fasterxml.jackson.databind.DeserializationFeature
-import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider
-import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider
-import org.glassfish.jersey.client.ClientConfig
-
-import javax.ws.rs.client.Client
-import javax.ws.rs.client.ClientBuilder
+import org.asynchttpclient.AsyncHttpClient
+import org.asynchttpclient.DefaultAsyncHttpClient
 
 class SteamApiWrapper {
 
     private static final DEFAULT_BASE_URL = 'https://api.steampowered.com'
-    private final Client client
+    private final AsyncHttpClient client
 
     public Dota2Wrapper dota2
     public ApiWrapper api
@@ -28,9 +23,7 @@ class SteamApiWrapper {
         player = new PlayerWrapper(key: key, baseUrl: baseUrl, client: client)
     }
 
-    private static Client createClient() {
-        JacksonJsonProvider jacksonJsonProvider = new JacksonJaxbJsonProvider()
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        ClientBuilder.newClient(new ClientConfig(jacksonJsonProvider))
+    private static AsyncHttpClient createClient() {
+        new DefaultAsyncHttpClient();
     }
 }

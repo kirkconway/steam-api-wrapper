@@ -4,29 +4,26 @@ import com.discobeard.steam.api.wrapper.BaseSpec
 import com.discobeard.steam.api.wrapper.exception.SteamException
 import com.discobeard.steam.api.wrapper.request.player.GetPlayerSummariesRequest
 import com.fasterxml.jackson.core.JsonParseException
-
-import javax.ws.rs.client.Client
-import javax.ws.rs.client.ClientBuilder
+import com.fasterxml.jackson.databind.JsonMappingException
 
 class RequestSpec extends BaseSpec {
 
-    Client client = ClientBuilder.newClient()
-
     def 'when steam does not respond or entity does not parse then a SteamException is thrown' (){
         given:
-            GetPlayerSummariesRequest testObj = new GetPlayerSummariesRequest(client,"http://localhost:10000","key")
+
+            GetPlayerSummariesRequest testObj = steamApiWrapper.player.playerSummariesRequest
         when:
             testObj.submit()
         then:
             SteamException ex = thrown()
-            ex.message == "Could not connect response the steam api"
-            ex.cause instanceof ConnectException
+            ex.message == "Could not connect to the steam api"
+            ex.cause instanceof JsonMappingException
 
     }
 
     def 'when an entity does not parse then a SteamException is thrown' (){
         given:
-            GetPlayerSummariesRequest testObj = new GetPlayerSummariesRequest(client,"http://localhost:1080","key")
+            GetPlayerSummariesRequest testObj = steamApiWrapper.player.playerSummariesRequest
             returnUnparsablePlayerSummaries()
         when:
             testObj.submit()
