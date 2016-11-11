@@ -9,12 +9,12 @@ class GetGameItemsRequest extends Request<GetGameItems> {
     private static final PATH = 'IEconDOTA2_570/GetGameItems/V001/'
 
     GetGameItemsRequest(AsyncHttpClient client, String baseUrl, String key) {
-        super(client, baseUrl, PATH, key)
-        returnType = GetGameItems.class
+        super(client, newGetBuilder(baseUrl + '/' + PATH), GetGameItems.class)
+        requestBuilder.addQueryParam('key', key)
     }
 
     GetGameItemsRequest withLanguage(String language) {
-        resource += "&language=${language}"
+        requestBuilder.addQueryParam('language', language)
         this
     }
 

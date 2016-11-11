@@ -9,12 +9,12 @@ class GetRecentlyPlayedGamesRequest extends Request<GetRecentlyPlayedGames> {
     private static final PATH = 'IPlayerService/GetRecentlyPlayedGames/v0001/'
 
     GetRecentlyPlayedGamesRequest(AsyncHttpClient client, String baseUrl, String key) {
-        super(client, baseUrl, PATH, key)
-        this.returnType = GetRecentlyPlayedGames.class
+        super(client, newGetBuilder(baseUrl + '/' + PATH), GetRecentlyPlayedGames.class)
+        addKey(key)
     }
 
     GetRecentlyPlayedGamesRequest withSteamId(String steamIds) {
-        resource += "&steamid=$steamIds"
+        requestBuilder.addQueryParam('steamid', steamIds)
         this
     }
 }

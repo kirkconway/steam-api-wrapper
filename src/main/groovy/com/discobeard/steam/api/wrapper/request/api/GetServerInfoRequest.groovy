@@ -9,7 +9,7 @@ class GetServerInfoRequest extends Request<GetServerInfoResponse> {
     private static final PATH = 'ISteamWebAPIUtil/GetServerInfo/v0001/'
 
     GetServerInfoRequest(AsyncHttpClient client, String baseUrl, String key) {
-        super(client, baseUrl, PATH, key)
-        this.returnType = GetServerInfoResponse.class
+        super(client, newGetBuilder(baseUrl + '/' + PATH), GetServerInfoResponse.class)
+        requestBuilder.addQueryParam("key", key)
     }
 }

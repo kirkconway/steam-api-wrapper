@@ -9,32 +9,32 @@ class GetMatchHistoryRequest extends Request<GetMatchHistory> {
     private static final PATH = 'IDOTA2Match_570/GetMatchHistory/V001/'
 
     GetMatchHistoryRequest(AsyncHttpClient client, String baseUrl, String key) {
-        super(client, baseUrl, PATH, key)
-        this.returnType = GetMatchHistory.class
+        super(client, newGetBuilder(baseUrl + '/' + PATH), GetMatchHistory.class)
+        addKey(key)
     }
 
     GetMatchHistoryRequest withHeroId(String heroId) {
-        resource += "&hero_id=${heroId}"
+        requestBuilder.addQueryParam("hero_id", heroId)
         this
     }
 
     GetMatchHistoryRequest withGameMode(String gameMode) {
-        resource += "&game_mode=${gameMode}"
+        requestBuilder.addQueryParam("game_mode", gameMode)
         this
     }
 
     GetMatchHistoryRequest withMinPlayers(String minPlayers) {
-        resource += "&min_players=${minPlayers}"
+        requestBuilder.addQueryParam("min_players", minPlayers)
         this
     }
 
     GetMatchHistoryRequest withMatchesRequested(String matchesRequested) {
-        resource += "&matches_requested=${matchesRequested}"
+        requestBuilder.addQueryParam("matches_requested", matchesRequested)
         this
     }
 
     GetMatchHistoryRequest withAccountId(String accountId) {
-        resource += "&account_id=${accountId}"
+        requestBuilder.addQueryParam("account_id", accountId)
         this
     }
 }

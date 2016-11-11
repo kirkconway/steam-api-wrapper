@@ -9,12 +9,12 @@ class GetMatchDetailsRequest extends Request<GetMatchDetails> {
     private static final PATH = 'IDOTA2Match_570/GetMatchDetails/V001/'
 
     GetMatchDetailsRequest(AsyncHttpClient client, String baseUrl, String key) {
-        super(client, baseUrl, PATH, key)
-        this.returnType = GetMatchDetails.class
+        super(client, newGetBuilder(baseUrl + '/' + PATH), GetMatchDetails.class)
+        addKey(key)
     }
 
     GetMatchDetailsRequest withMatchId(String matchId) {
-        resource += "&match_id=${matchId}"
+        requestBuilder.addQueryParam('match_id',matchId)
         this
     }
 }

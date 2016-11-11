@@ -3,6 +3,7 @@ package com.discobeard.steam.api.wrapper.request.dota2
 import com.discobeard.steam.api.wrapper.BaseSpec
 import com.discobeard.steam.api.wrapper.domain.LeaverStatus
 import com.discobeard.steam.api.wrapper.response.dota2.getmatchdetails.GetMatchDetails
+import org.mockserver.model.HttpRequest
 
 import static com.discobeard.steam.api.wrapper.domain.Team.Dire
 import static com.discobeard.steam.api.wrapper.domain.Team.Radiant
@@ -24,10 +25,12 @@ class GetMatchDetailsRequestSpec extends BaseSpec {
     }
 
     def 'with matchid correct adds the match id'() {
+        given:
+            returnMatchDetails()
         when:
-            GetMatchDetailsRequest request = steamApiWrapper.dota2.getMatchDetailsRequest().withMatchId("12341")
+            steamApiWrapper.dota2.getMatchDetailsRequest().withMatchId("12341").submit()
         then:
-            request.resource == 'http://localhost:1080/IDOTA2Match_570/GetMatchDetails/V001/?key=key&match_id=12341'
+            mockServer.verify(HttpRequest.request().withQueryStringParameter('match_id','12341'))
     }
 
 }

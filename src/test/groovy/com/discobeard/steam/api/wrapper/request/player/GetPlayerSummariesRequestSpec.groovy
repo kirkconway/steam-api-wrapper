@@ -3,6 +3,7 @@ package com.discobeard.steam.api.wrapper.request.player
 import com.discobeard.steam.api.wrapper.BaseSpec
 import com.discobeard.steam.api.wrapper.domain.SteamId
 import com.discobeard.steam.api.wrapper.response.player.getplayersummaries.GetPlayerSummaries
+import org.mockserver.model.HttpRequest
 
 class GetPlayerSummariesRequestSpec extends BaseSpec {
 
@@ -18,10 +19,11 @@ class GetPlayerSummariesRequestSpec extends BaseSpec {
 
     def 'steam ids are correctly split and added to the response'() {
         given:
+            returnPlayerSummaries()
             String[] steamIds = ["12", "13", "14"]
         when:
-            GetPlayerSummariesRequest request = steamApiWrapper.player.getPlayerSummariesRequest().withSteamIds(steamIds)
+            steamApiWrapper.player.getPlayerSummariesRequest().withSteamIds(steamIds).submit()
         then:
-            request.resource == "http://localhost:1080/ISteamUser/GetPlayerSummaries/v0002/?key=key&steamids=12,13,14"
+            mockServer.verify(HttpRequest.request().withQueryStringParameter('steamIds','12,13,14'))
     }
 }

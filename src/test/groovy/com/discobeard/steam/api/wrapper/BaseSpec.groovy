@@ -12,7 +12,7 @@ import static org.mockserver.integration.ClientAndServer.startClientAndServer
 class BaseSpec extends Specification {
 
     private static ClientAndProxy proxy;
-    private static ClientAndServer mockServer;
+    protected static ClientAndServer mockServer;
 
     SteamApiWrapper steamApiWrapper = new SteamApiWrapper("key",  "http://localhost:1080")
 

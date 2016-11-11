@@ -9,7 +9,7 @@ class GetSupportedAPIListRequest extends Request<GetSupportedApiListResponse> {
     private static final PATH = 'ISteamWebAPIUtil/GetSupportedAPIList/v0001'
 
     public GetSupportedAPIListRequest(AsyncHttpClient client, String baseUrl, String key) {
-        super(client, baseUrl, PATH, key)
-        this.returnType = GetSupportedApiListResponse.class
+        super(client, newGetBuilder(baseUrl + '/' + PATH), GetSupportedApiListResponse.class)
+        requestBuilder.addQueryParam('key', key)
     }
 }

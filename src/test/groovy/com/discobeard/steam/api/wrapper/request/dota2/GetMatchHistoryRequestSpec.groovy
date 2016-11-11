@@ -2,6 +2,7 @@ package com.discobeard.steam.api.wrapper.request.dota2
 
 import com.discobeard.steam.api.wrapper.BaseSpec
 import com.discobeard.steam.api.wrapper.response.dota2.getmatchhistory.GetMatchHistory
+import org.mockserver.model.HttpRequest
 
 class GetMatchHistoryRequestSpec extends BaseSpec {
 
@@ -15,37 +16,47 @@ class GetMatchHistoryRequestSpec extends BaseSpec {
     }
 
     def 'attaches hero id to request'() {
+        given:
+            steamReturnsMatchHistoryResponse()
         when:
-            GetMatchHistoryRequest request = steamApiWrapper.dota2.getMatchHistoryRequest().withHeroId("heroId")
+            steamApiWrapper.dota2.getMatchHistoryRequest().withHeroId("heroId").submit()
         then:
-            request.resource.contains("&hero_id=heroId")
+            mockServer.verify(HttpRequest.request().withQueryStringParameter('hero_id','heroId'))
     }
 
     def 'attaches game mode to request'() {
+        given:
+            steamReturnsMatchHistoryResponse()
         when:
-        GetMatchHistoryRequest request = steamApiWrapper.dota2.getMatchHistoryRequest().withGameMode("gamemode")
+            steamApiWrapper.dota2.getMatchHistoryRequest().withGameMode("gamemode").submit()
         then:
-        request.resource.contains("&game_mode=gamemode")
+            mockServer.verify(HttpRequest.request().withQueryStringParameter('game_mode','gamemode'))
     }
 
     def 'attaches mid players to request'() {
+        given:
+            steamReturnsMatchHistoryResponse()
         when:
-        GetMatchHistoryRequest request = steamApiWrapper.dota2.getMatchHistoryRequest().withMinPlayers("1")
+            steamApiWrapper.dota2.getMatchHistoryRequest().withMinPlayers("1").submit()
         then:
-        request.resource.contains("&min_players=1")
+            mockServer.verify(HttpRequest.request().withQueryStringParameter('min_players','1'))
     }
 
     def 'attaches matches requested to request'() {
+        given:
+            steamReturnsMatchHistoryResponse()
         when:
-        GetMatchHistoryRequest request = steamApiWrapper.dota2.getMatchHistoryRequest().withMatchesRequested("1")
+            steamApiWrapper.dota2.getMatchHistoryRequest().withMatchesRequested("1").submit()
         then:
-        request.resource.contains("&matches_requested=1")
+            mockServer.verify(HttpRequest.request().withQueryStringParameter('matches_requested','1'))
     }
 
     def 'attaches with accountId to request'() {
+        given:
+            steamReturnsMatchHistoryResponse()
         when:
-        GetMatchHistoryRequest request = steamApiWrapper.dota2.getMatchHistoryRequest().withAccountId("1")
+            steamApiWrapper.dota2.getMatchHistoryRequest().withAccountId("1").submit()
         then:
-        request.resource.contains("&account_id=1")
+            mockServer.verify(HttpRequest.request().withQueryStringParameter('account_id','1'))
     }
 }

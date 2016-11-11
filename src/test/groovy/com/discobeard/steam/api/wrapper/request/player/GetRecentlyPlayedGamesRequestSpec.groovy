@@ -2,6 +2,7 @@ package com.discobeard.steam.api.wrapper.request.player
 
 import com.discobeard.steam.api.wrapper.BaseSpec
 import com.discobeard.steam.api.wrapper.response.player.getrecentlyplayedgames.GetRecentlyPlayedGames
+import org.mockserver.model.HttpRequest
 
 class GetRecentlyPlayedGamesRequestSpec extends BaseSpec {
 
@@ -23,10 +24,12 @@ class GetRecentlyPlayedGamesRequestSpec extends BaseSpec {
     }
 
     def 'attaches steam id to request' () {
+        given:
+            returnGetRecentlyPlayedGames()
         when:
-            GetRecentlyPlayedGamesRequest request = steamApiWrapper.player.getRecentlyPlayedGamesRequest().withSteamId("1")
+            steamApiWrapper.player.getRecentlyPlayedGamesRequest().withSteamId("1").submit()
         then:
-            request.resource.contains("&steamid=1")
+            mockServer.verify(HttpRequest.request().withQueryStringParameter('steamid','1'))
     }
 
 
