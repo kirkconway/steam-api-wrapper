@@ -15,15 +15,11 @@ class SteamApiWrapper {
     public ApiWrapper api
     public PlayerWrapper player
 
-
-
     public SteamApiWrapper(String key, String baseUrl = DEFAULT_BASE_URL) {
         client = new DefaultAsyncHttpClient()
 
         api = new ApiWrapper(key: key, baseUrl: baseUrl, client: client)
         dota2 = new Dota2Wrapper(key: key, baseUrl: baseUrl, client: client)
         player = new PlayerWrapper(key: key, baseUrl: baseUrl, client: client)
-
-
     }
 }
