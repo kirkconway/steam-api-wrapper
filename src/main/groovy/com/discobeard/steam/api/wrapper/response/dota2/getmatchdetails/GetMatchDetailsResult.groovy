@@ -6,9 +6,11 @@ import com.discobeard.steam.api.wrapper.deserializer.PlayerDeserializer
 import com.discobeard.steam.api.wrapper.domain.LobbyType
 import com.discobeard.steam.api.wrapper.domain.MatchDetailsPlayer
 import com.discobeard.steam.api.wrapper.domain.Team
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 class GetMatchDetailsResult {
 
     @JsonProperty(value = 'match_id')
@@ -22,7 +24,9 @@ class GetMatchDetailsResult {
     @JsonProperty(value = 'radiant_win')
     @JsonDeserialize(using=BooleanToTeamDeserializer.class, as = Team.class)
     Team winner
-
+    short flags
+    @JsonProperty(value = 'pre_game_duration')
+    long preGameDuration
     @JsonProperty(value = 'duration')
     long durationInSeconds
     @JsonProperty(value = 'start_time')
