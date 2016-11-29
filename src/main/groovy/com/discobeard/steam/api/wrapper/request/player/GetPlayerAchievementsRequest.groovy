@@ -8,22 +8,22 @@ class GetPlayerAchievementsRequest extends Request<GetPlayerAchievements>{
     private static final PATH = 'ISteamUserStats/GetPlayerAchievements/v0001/'
 
     GetPlayerAchievementsRequest(AsyncHttpClient client, String baseUrl, String key) {
-        super(client, baseUrl, PATH, key)
-        returnType = GetPlayerAchievements.class
+        super(client, newGetBuilder(baseUrl+'/'+PATH), GetPlayerAchievements.class)
+        addKey(key)
     }
 
     GetPlayerAchievementsRequest withAppId(String appId) {
-        resource += "&appid=${appId}"
+        requestBuilder.addQueryParam('appid', appId)
         this
     }
 
     GetPlayerAchievementsRequest withSteamId(String steamId) {
-        resource += "&steamid=${steamId}"
+        requestBuilder.addQueryParam('steamid', steamId)
         this
     }
 
     GetPlayerAchievementsRequest withLanguage(String language) {
-        resource += "&l=${language}"
+        requestBuilder.addQueryParam('l', language)
         this
     }
 }

@@ -10,7 +10,7 @@ class GetPlayerSummariesRequest extends Request<GetPlayerSummaries> {
 
     GetPlayerSummariesRequest(AsyncHttpClient client, String baseUrl, String key) {
         super(client, newGetBuilder(baseUrl+'/'+PATH), GetPlayerSummaries.class)
-        requestBuilder.addQueryParam("key", key)
+        addKey(key)
     }
 
     GetPlayerSummariesRequest withSteamIds(String[] steamIds) {
