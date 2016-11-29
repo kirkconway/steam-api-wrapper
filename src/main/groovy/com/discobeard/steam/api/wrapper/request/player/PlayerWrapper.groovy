@@ -11,4 +11,12 @@ class PlayerWrapper extends RequestWrapper{
     GetPlayerSummariesRequest getPlayerSummariesRequest(){
         new GetPlayerSummariesRequest(client, baseUrl, key)
     }
+
+    GetPlayerAchievementsRequest getPlayerAchievementsRequest(){
+        new GetPlayerAchievementsRequest(client, baseUrl, key)
+    }
+
+    GetSchemaForGameRequest getSchemaForGameRequest(){
+        new GetSchemaForGameRequest(client, baseUrl, key)
+    }
 }
