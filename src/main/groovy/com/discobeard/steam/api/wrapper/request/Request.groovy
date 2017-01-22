@@ -25,7 +25,8 @@ abstract class Request<T> {
     public T submit() throws SteamException {
         try {
 
-            Future<Response> f = client.executeRequest(requestBuilder.build())
+            def request = requestBuilder.build()
+            Future<Response> f = client.executeRequest(request)
 
             ObjectMapper mapper = new ObjectMapper()
             mapper.readValue(f.get().responseBody, returnType)

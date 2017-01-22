@@ -63,7 +63,7 @@ class PlayerDeserializer extends  JsonDeserializer<List<MatchDetailsPlayer>> {
     private List<MatchDetailsPlayer.Ability> getAbility(JsonNode jsonNode){
         List<MatchDetailsPlayer.Ability> abilities = new ArrayList<>()
 
-        if(jsonNode.isArray()){
+        if(jsonNode?.isArray()){
             abilities = jsonNode.collect{
                 MatchDetailsPlayer.Ability ability =  new MatchDetailsPlayer.Ability()
                 ability.ability = it.get('ability').asInt()
