@@ -1,7 +1,9 @@
 package com.discobeard.steam.api.wrapper.response.dota2.getmatchhistory
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 class Match {
 
     @JsonProperty(value = 'match_id')
