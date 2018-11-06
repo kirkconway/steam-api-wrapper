@@ -1,5 +1,7 @@
 apply plugin: 'groovy'
 apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'java-library'
 
 group = 'com.discobeard'
 version = '0.1'
@@ -7,6 +9,16 @@ version = '0.1'
 
 repositories {
     mavenCentral()
+}
+
+task javadocJar(type: Jar) {
+    from javadoc
+    classifier = 'javadoc'
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
 }
 
 dependencies {
@@ -20,6 +32,16 @@ dependencies {
     testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
     testCompile ('org.mock-server:mockserver-netty:3.9.17'){
         exclude group:'com.fasterxml.jackson.core'
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+        }
     }
 }
 

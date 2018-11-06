@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.JsonNode
 
-class PlayerDeserializer extends  JsonDeserializer<List<MatchDetailsPlayer>> {
+class PlayerDeserializer extends JsonDeserializer<List<MatchDetailsPlayer>> {
     @Override
     List<MatchDetailsPlayer> deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException, JsonProcessingException {
         ObjectCodec objectCodec = jsonParser.getCodec()
@@ -20,29 +20,29 @@ class PlayerDeserializer extends  JsonDeserializer<List<MatchDetailsPlayer>> {
 
         if (jsonNode.isArray()) {
 
-            players = jsonNode.collect {
+            players = jsonNode.collect { JsonNode node ->
 
                 MatchDetailsPlayer marketDetailsPlayer = new MatchDetailsPlayer()
 
-                marketDetailsPlayer.accountId = it.get('account_id').asLong()
-                marketDetailsPlayer.abilities = getAbility(it.get('ability_upgrades'))
-                marketDetailsPlayer.items = getItems(it)
-                marketDetailsPlayer.level = it.get('level').asInt()
-                marketDetailsPlayer.assists = it.get('assists').asInt()
-                marketDetailsPlayer.deaths = it.get('deaths').asInt()
-                marketDetailsPlayer.kills = it.get('kills').asInt()
-                marketDetailsPlayer.team = getTeam(it.get('player_slot').asInt())
-                marketDetailsPlayer.heroId = it.get('hero_id').asInt()
-                marketDetailsPlayer.leaverStatus = getLeaverStatus(it.get('leaver_status').asInt())
-                marketDetailsPlayer.gold = it.get('gold').asInt()
-                marketDetailsPlayer.lastHits = it.get('last_hits').asInt()
-                marketDetailsPlayer.denies = it.get('denies').asInt()
-                marketDetailsPlayer.goldPerMin = it.get('gold_per_min').asInt()
-                marketDetailsPlayer.xpPerMin = it.get('xp_per_min').asInt()
-                marketDetailsPlayer.goldSpent = it.get('gold_spent').asInt()
-                marketDetailsPlayer.heroDamage = it.get('hero_damage').asInt()
-                marketDetailsPlayer.towerDamage = it.get('tower_damage').asInt()
-                marketDetailsPlayer.heroHealing = it.get('hero_healing').asInt()
+                marketDetailsPlayer.accountId = node.get('account_id').asLong()
+                marketDetailsPlayer.abilities = getAbility(node.get('ability_upgrades'))
+                marketDetailsPlayer.items = getItems(node)
+                marketDetailsPlayer.level = safelyGetInteger(node, "level")
+                marketDetailsPlayer.assists = safelyGetInteger(node, "assists")
+                marketDetailsPlayer.deaths = safelyGetInteger(node, 'deaths')
+                marketDetailsPlayer.kills = safelyGetInteger(node, 'kills')
+                marketDetailsPlayer.team = getTeam(node.get('player_slot').asInt())
+                marketDetailsPlayer.heroId = safelyGetInteger(node, 'hero_id')
+                marketDetailsPlayer.leaverStatus = getLeaverStatus(safelyGetInteger(node, 'leaver_status'))
+                marketDetailsPlayer.gold = safelyGetInteger(node, 'gold')
+                marketDetailsPlayer.lastHits = safelyGetInteger(node, 'last_hits')
+                marketDetailsPlayer.denies =safelyGetInteger(node, 'denies')
+                marketDetailsPlayer.goldPerMin = safelyGetInteger(node, 'gold_per_min')
+                marketDetailsPlayer.xpPerMin = safelyGetInteger(node, 'xp_per_min')
+                marketDetailsPlayer.goldSpent = safelyGetInteger(node, 'gold_spent')
+                marketDetailsPlayer.heroDamage = safelyGetInteger(node, 'hero_damage')
+                marketDetailsPlayer.towerDamage = safelyGetInteger(node, 'tower_damage')
+                marketDetailsPlayer.heroHealing = safelyGetInteger(node, 'hero_healing')
 
                 marketDetailsPlayer
             }
@@ -51,21 +51,26 @@ class PlayerDeserializer extends  JsonDeserializer<List<MatchDetailsPlayer>> {
         players
     }
 
-    private List<Integer> getItems(JsonNode jsonNode){
+    private Integer safelyGetInteger(JsonNode node, String fieldName){
+        node.get(fieldName) == null ? 0 : node.get(fieldName).asInt()
+
+    }
+
+    private List<Integer> getItems(JsonNode jsonNode) {
         List<Integer> items = new ArrayList<>()
-        for(int i=0;i<6;i++) {
+        for (int i = 0; i < 6; i++) {
             items.add(jsonNode.get("item_${i}")?.asInt())
         }
 
         items
     }
 
-    private List<MatchDetailsPlayer.Ability> getAbility(JsonNode jsonNode){
+    private List<MatchDetailsPlayer.Ability> getAbility(JsonNode jsonNode) {
         List<MatchDetailsPlayer.Ability> abilities = new ArrayList<>()
 
-        if(jsonNode?.isArray()){
-            abilities = jsonNode.collect{
-                MatchDetailsPlayer.Ability ability =  new MatchDetailsPlayer.Ability()
+        if (jsonNode?.isArray()) {
+            abilities = jsonNode.collect {
+                MatchDetailsPlayer.Ability ability = new MatchDetailsPlayer.Ability()
                 ability.ability = it.get('ability').asInt()
                 ability.level = it.get('level').asInt()
                 ability.time = it.get('time').asInt()
@@ -76,14 +81,14 @@ class PlayerDeserializer extends  JsonDeserializer<List<MatchDetailsPlayer>> {
         abilities
     }
 
-    private Team getTeam(int team){
-        if(team>=128){
+    private Team getTeam(int team) {
+        if (team >= 128) {
             return Team.Dire
         }
         Team.Radiant
     }
 
-    private LeaverStatus getLeaverStatus(int leaverStatus){
+    private LeaverStatus getLeaverStatus(int leaverStatus) {
         LeaverStatus.getByValue(leaverStatus)
     }
 }
