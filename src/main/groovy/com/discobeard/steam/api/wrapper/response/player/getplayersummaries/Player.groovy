@@ -2,8 +2,10 @@ package com.discobeard.steam.api.wrapper.response.player.getplayersummaries
 
 import com.discobeard.steam.api.wrapper.deserializer.SteamIdDeserializer
 import com.discobeard.steam.api.wrapper.domain.SteamId
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 class Player {
 
     @JsonDeserialize(using=SteamIdDeserializer.class, as = SteamId.class)
